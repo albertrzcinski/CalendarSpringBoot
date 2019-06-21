@@ -28,7 +28,7 @@ public class DatabaseSeeder implements CommandLineRunner {
 
         // Example events
         events.add(new EventModel("Zakupy", "2019-06-19", "2019-06-20T12:00:00"));
-        events.add(new EventModel("Obiad", "2019-06-20", ""));
+        events.add(new EventModel("Obiad", "2019-06-20", "2019-06-20"));
         events.add(new EventModel("Praca domowa", "2019-06-22T15:00:00", "2019-06-22T20:00:00"));
 
         eventRepository.saveAll(events);
