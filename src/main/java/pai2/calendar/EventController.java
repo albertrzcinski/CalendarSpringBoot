@@ -3,6 +3,7 @@ package pai2.calendar;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "events")
@@ -19,6 +20,9 @@ public class EventController {
     public List<EventModel> getAll(){
         return eventRepository.findAll();
     }
+
+    @RequestMapping("/{id}")
+    public Optional<EventModel> getEventById(@PathVariable long id) {return eventRepository.findById(id); }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public List<EventModel> save(@RequestBody EventModel eventModel){
