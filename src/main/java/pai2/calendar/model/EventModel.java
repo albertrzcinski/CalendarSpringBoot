@@ -1,4 +1,4 @@
-package pai2.calendar;
+package pai2.calendar.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

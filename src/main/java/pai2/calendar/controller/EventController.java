@@ -1,6 +1,8 @@
-package pai2.calendar;
+package pai2.calendar.controller;
 
 import org.springframework.web.bind.annotation.*;
+import pai2.calendar.model.EventModel;
+import pai2.calendar.db.EventRepository;
 
 import java.util.List;
 import java.util.Optional;
