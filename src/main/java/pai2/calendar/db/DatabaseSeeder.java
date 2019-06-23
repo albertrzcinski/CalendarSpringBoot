@@ -41,7 +41,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         events.add(new EventModel("Praca domowa", "2019-06-22T15:00:00", "2019-06-22T20:00:00"));
 
         // Example users
-        users.add(new UserModel("user",passwordEncoder.encode("u123")));
+        users.add(new UserModel("alb",passwordEncoder.encode("alb2")));
         users.add(new UserModel("admin",passwordEncoder.encode("a123")));
 
         eventRepository.saveAll(events);
