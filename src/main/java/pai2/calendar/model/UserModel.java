@@ -15,9 +15,13 @@ public class UserModel {
     @Column(nullable = false)
     private String password;
 
-    public UserModel(String username, String password) {
+    @Column(nullable = false)
+    private String email;
+
+    public UserModel(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
     public UserModel() {}
@@ -40,5 +44,13 @@ public class UserModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

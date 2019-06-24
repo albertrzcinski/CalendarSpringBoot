@@ -39,6 +39,7 @@ public class Configuration extends WebSecurityConfigurerAdapter {
                 .addFilter(new JWTAuthorizationFilter(authenticationManager(),this.userRepository))
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/users/save").permitAll()
                 .anyRequest().authenticated();
 
     }

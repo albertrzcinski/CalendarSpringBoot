@@ -28,6 +28,8 @@ public class MyUser implements UserDetails {
         return this.userModel.getUsername();
     }
 
+    public String getEmail() { return this.userModel.getEmail();}
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
