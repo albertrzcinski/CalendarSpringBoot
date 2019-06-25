@@ -35,16 +35,17 @@ public class DatabaseSeeder implements CommandLineRunner {
         List<EventModel> events = new ArrayList<>();
         List<UserModel> users = new ArrayList<>();
 
-        // Example events
-        events.add(new EventModel("Zakupy", "2019-06-19", "2019-06-20T12:00:00"));
-        events.add(new EventModel("Obiad", "2019-06-20", "2019-06-20"));
-        events.add(new EventModel("Praca domowa", "2019-06-22T15:00:00", "2019-06-22T20:00:00"));
-
         // Example users
         users.add(new UserModel("alb",passwordEncoder.encode("alb2"),"alb@gmail.com"));
         users.add(new UserModel("admin",passwordEncoder.encode("a123"),"adm@onet.pl"));
 
-        eventRepository.saveAll(events);
         userRepository.saveAll(users);
+
+        // Example events
+        events.add(new EventModel("Zakupy", "2019-06-19", "2019-06-20T12:00:00", users.get(0)));
+        events.add(new EventModel("Obiad", "2019-06-20", "2019-06-20", users.get(0)));
+        events.add(new EventModel("Praca domowa", "2019-06-22T15:00:00", "2019-06-22T20:00:00", users.get(1)));
+
+        eventRepository.saveAll(events);
     }
 }

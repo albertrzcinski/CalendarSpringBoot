@@ -2,9 +2,11 @@ package pai2.calendar.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pai2.calendar.model.EventModel;
 import pai2.calendar.model.UserModel;
 
 import java.util.Collection;
+import java.util.List;
 
 public class MyUser implements UserDetails {
     private UserModel userModel;
@@ -29,6 +31,8 @@ public class MyUser implements UserDetails {
     }
 
     public String getEmail() { return this.userModel.getEmail();}
+
+    public List<EventModel> getEvents() {return this.userModel.getEvents(); }
 
     @Override
     public boolean isAccountNonExpired() {

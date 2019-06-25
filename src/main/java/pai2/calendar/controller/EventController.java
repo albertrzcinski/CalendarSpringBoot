@@ -1,8 +1,12 @@
 package pai2.calendar.controller;
 
 import org.springframework.web.bind.annotation.*;
+import pai2.calendar.db.UserRepository;
 import pai2.calendar.model.EventModel;
 import pai2.calendar.db.EventRepository;
+import pai2.calendar.model.EventViewModel;
+import pai2.calendar.model.Mapper;
+import pai2.calendar.model.UserModel;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,9 +17,13 @@ import java.util.Optional;
 public class EventController {
 
     private EventRepository eventRepository;
+    private UserRepository userRepository;
+    private Mapper mapper;
 
-    public EventController(EventRepository eventRepository){
+    public EventController(EventRepository eventRepository, UserRepository userRepository, Mapper mapper){
         this.eventRepository = eventRepository;
+        this.userRepository = userRepository;
+        this.mapper = mapper;
     }
 
     @RequestMapping("/all")
@@ -26,8 +34,16 @@ public class EventController {
     @RequestMapping("/{id}")
     public Optional<EventModel> getEventById(@PathVariable long id) {return eventRepository.findById(id); }
 
+    @RequestMapping("/byUser/{username}")
+    public List<EventModel> getAllByUserModel(@PathVariable String username) {
+        UserModel user = this.userRepository.findByUsername(username);
+
+        return eventRepository.findAllByUserModel(user);
+    }
+
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public List<EventModel> save(@RequestBody EventModel eventModel){
+    public List<EventModel> save(@RequestBody EventViewModel eventViewModel){
+        EventModel eventModel = this.mapper.mapToEventModel(eventViewModel);
         eventRepository.save(eventModel);
 
         return eventRepository.findAll();

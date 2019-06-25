@@ -1,6 +1,11 @@
 package pai2.calendar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class UserModel {
@@ -16,12 +21,18 @@ public class UserModel {
     private String password;
 
     @Column(nullable = false)
+    @Email
     private String email;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "userModel", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<EventModel> events;
 
     public UserModel(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
+        this.events = new ArrayList<>();
     }
 
     public UserModel() {}
@@ -52,5 +63,13 @@ public class UserModel {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<EventModel> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventModel> events) {
+        this.events = events;
     }
 }

@@ -1,9 +1,8 @@
 package pai2.calendar.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 @Entity
 public class EventModel {
@@ -16,12 +15,25 @@ public class EventModel {
     private String start;
     private String end;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private UserModel userModel;
+
     public EventModel(){}
 
-    public EventModel (String title, String start, String end){
+    public EventModel(Long id, String title, String start, String end, UserModel userModel){
+        this.id = id;
         this.title = title;
         this.start = start;
         this.end = end;
+        this.userModel = userModel;
+    }
+
+    public EventModel (String title, String start, String end, UserModel userModel){
+        this.title = title;
+        this.start = start;
+        this.end = end;
+        this.userModel = userModel;
     }
 
     public Long getId() {
@@ -38,5 +50,13 @@ public class EventModel {
 
     public String getEnd() {
         return end;
+    }
+
+    public void setUserModel(UserModel userModel) {
+        this.userModel = userModel;
+    }
+
+    public UserModel getUserModel() {
+        return userModel;
     }
 }
