@@ -14,7 +14,6 @@ public class Mapper {
 
     public EventModel mapToEventModel(EventViewModel eventViewModel){
         UserModel userModel = userRepository.findByUsername(eventViewModel.getUsername());
-        System.out.println(eventViewModel.getUsername());
 
         return new EventModel(eventViewModel.getId(), eventViewModel.getTitle(),
                 eventViewModel.getStart(),eventViewModel.getEnd(), userModel);

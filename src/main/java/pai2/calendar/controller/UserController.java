@@ -27,9 +27,13 @@ public class UserController {
 
     @PostMapping("save")
     public List<UserModel> save(@RequestBody UserModel userModel){
-        UserModel userModelTmp = userModel;
-        userModelTmp.setPassword(passwordEncoder.encode(userModel.getPassword()));
-        this.userRepository.save(userModelTmp);
-        return this.userRepository.findAll();
+        if(userRepository.findByUsername(userModel.getUsername()) != null) {
+            return null;
+        }
+        else {
+            userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
+            this.userRepository.save(userModel);
+            return this.userRepository.findAll();
+        }
     }
 }
